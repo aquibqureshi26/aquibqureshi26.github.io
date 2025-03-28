@@ -87,45 +87,7 @@ tail_includes:
     </div>
     <!-- .post-meta -->
   </header>
-  
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let pageUrl = encodeURIComponent(window.location.pathname);
-    let apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}`;
 
-    console.log("Fetching hit count...");
-    console.log("Page URL:", window.location.pathname);
-    console.log("Encoded Page URL:", pageUrl);
-    console.log("API URL:", apiUrl);
-
-    fetch(apiUrl)
-        .then(response => {
-            console.log("Raw response:", response);
-            return response.text();  // Read as text first
-        })
-        .then(text => {
-            console.log("Raw response text:", text);
-            try {
-                let data = JSON.parse(text);  // Convert to JSON
-                console.log("Parsed JSON data:");
-                console.table(data); // Display as a table if it's an object or an array
-
-                if (data.hits) {
-                    document.getElementById("hitCount").innerText = `Views: ${data.hits}`;
-                } else {
-                    document.getElementById("hitCount").innerText = "Views: 0";
-                }
-            } catch (error) {
-                console.error("JSON parsing error:", error);
-                document.getElementById("hitCount").innerText = "Views: Error";
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching hit count:", error);
-            document.getElementById("hitCount").innerText = "Views: N/A";
-        });
-  });
-</script>
 
   
   <div class="content">
