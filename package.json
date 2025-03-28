@@ -1,0 +1,7 @@
+{
+  "name": "aquibqureshi26.github.io",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "JEKYLL_ENV=production bundle exec jekyll build"
+  }
+}
