@@ -89,34 +89,41 @@ tail_includes:
   </header>
   
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Get the page name dynamically
-        let pageUrl = encodeURIComponent(window.location.pathname);
-        let apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}`;
+  document.addEventListener("DOMContentLoaded", function () {
+    let pageUrl = encodeURIComponent(window.location.pathname);
+    let apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}`;
 
-        console.log("Fetching hit count...");
-        console.log("Page URL:", window.location.pathname);
-        console.log("Encoded Page URL:", pageUrl);
-        console.log("API URL:", apiUrl);
+    console.log("Fetching hit count...");
+    console.log("Page URL:", window.location.pathname);
+    console.log("Encoded Page URL:", pageUrl);
+    console.log("API URL:", apiUrl);
 
-        fetch(apiUrl)
-            .then(response => {
-                console.log("Response received:", response);
-                return response.json();
-            })
-            .then(data => {
-                console.log("API Response Data:", data);
+    fetch(apiUrl)
+        .then(response => {
+            console.log("Raw response:", response);
+            return response.text();  // Read as text first
+        })
+        .then(text => {
+            console.log("Raw response text:", text);
+            try {
+                let data = JSON.parse(text);  // Convert to JSON
+                console.log("Parsed JSON data:", data);
+
                 if (data.hits) {
                     document.getElementById("hitCount").innerText = `Views: ${data.hits}`;
                 } else {
                     document.getElementById("hitCount").innerText = "Views: 0";
                 }
-            })
-            .catch(error => {
-                console.error("Error fetching hit count:", error);
-                document.getElementById("hitCount").innerText = "Views: N/A";
-            });
-    });
+            } catch (error) {
+                console.error("JSON parsing error:", error);
+                document.getElementById("hitCount").innerText = "Views: Error";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching hit count:", error);
+            document.getElementById("hitCount").innerText = "Views: N/A";
+        });
+});
   </script>
   
   <div class="content">
