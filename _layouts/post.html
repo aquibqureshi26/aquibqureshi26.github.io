@@ -107,7 +107,8 @@ tail_includes:
             console.log("Raw response text:", text);
             try {
                 let data = JSON.parse(text);  // Convert to JSON
-                console.log("Parsed JSON data:", data);
+                console.log("Parsed JSON data:");
+                console.table(data); // Display as a table if it's an object or an array
 
                 if (data.hits) {
                     document.getElementById("hitCount").innerText = `Views: ${data.hits}`;
@@ -123,8 +124,9 @@ tail_includes:
             console.error("Error fetching hit count:", error);
             document.getElementById("hitCount").innerText = "Views: N/A";
         });
-});
-  </script>
+  });
+</script>
+
   
   <div class="content">
     {{ content }}
