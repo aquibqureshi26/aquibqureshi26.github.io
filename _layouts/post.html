@@ -90,24 +90,33 @@ tail_includes:
   
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Get the page name dynamically
-      let pageUrl = encodeURIComponent(window.location.pathname);
-      let apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}`;
+        // Get the page name dynamically
+        let pageUrl = encodeURIComponent(window.location.pathname);
+        let apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}`;
 
-      fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-              if (data.hits) {
-                  document.getElementById("hitCount").innerText = `Views: ${data.hits}`;
-              } else {
-                  document.getElementById("hitCount").innerText = "Views: 0";
-              }
-          })
-          .catch(error => {
-              console.error("Error fetching hit count:", error);
-              document.getElementById("hitCount").innerText = "Views: N/A";
-          });
-        });
+        console.log("Fetching hit count...");
+        console.log("Page URL:", window.location.pathname);
+        console.log("Encoded Page URL:", pageUrl);
+        console.log("API URL:", apiUrl);
+
+        fetch(apiUrl)
+            .then(response => {
+                console.log("Response received:", response);
+                return response.json();
+            })
+            .then(data => {
+                console.log("API Response Data:", data);
+                if (data.hits) {
+                    document.getElementById("hitCount").innerText = `Views: ${data.hits}`;
+                } else {
+                    document.getElementById("hitCount").innerText = "Views: 0";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching hit count:", error);
+                document.getElementById("hitCount").innerText = "Views: N/A";
+            });
+    });
   </script>
   
   <div class="content">
