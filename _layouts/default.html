@@ -75,27 +75,7 @@ layout: compress
     {% endif %}
 
     <!-- JavaScripts -->
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Get the page name dynamically
-      let pageUrl = encodeURIComponent(window.location.pathname);
-      let apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}`;
 
-      fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-              if (data.hits) {
-                  document.getElementById("hitCount").innerText = `Views: ${data.hits}`;
-              } else {
-                  document.getElementById("hitCount").innerText = "Views: 0";
-              }
-          })
-          .catch(error => {
-              console.error("Error fetching hit count:", error);
-              document.getElementById("hitCount").innerText = "Views: N/A";
-          });
-        });
-    </script>
 
     {% include js-selector.html %}
 
