@@ -79,6 +79,7 @@ layout: compress
     <script>
       document.addEventListener("DOMContentLoaded", function () {
           var pageUrl = encodeURIComponent(window.location.pathname);
+          var timestamp = new Date().getTime();
           var apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}&t=${timestamp}`;
           fetch(apiUrl, { cache: "no-store" })
               .then(function(response) {
