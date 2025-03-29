@@ -79,14 +79,8 @@ layout: compress
     <script>
       document.addEventListener("DOMContentLoaded", function () {
           var pageUrl = encodeURIComponent(window.location.pathname);
-          var apiUrl = "https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=" + pageUrl;
-
-          console.log("Fetching hit count...");
-          console.log("Page URL:", window.location.pathname);
-          console.log("Encoded Page URL:", pageUrl);
-          console.log("API URL:", apiUrl);
-
-          fetch(apiUrl)
+          var apiUrl = `https://doctorhitcounter-ftekh0b6ebb5g5b3.centralindia-01.azurewebsites.net/api/HttpTrigger1?website=azuredoctor&page=${pageUrl}&t=${timestamp}`;
+          fetch(apiUrl, { cache: "no-store" })
               .then(function(response) {
                   return response.json();
               })
